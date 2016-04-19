@@ -1,0 +1,30 @@
+<html>
+<head>
+<title>Python Login Page</title>
+</head>
+<body>
+
+	{% if error %}
+	<p><strong>Error:</strong> {{ error }} </p>
+	{% endif %}
+
+	<form action="/login" method="post">
+		<p>Enter Email:</p>
+		<p>
+			<input type="email" name="email" />
+		</p>
+		<p>Enter Password:</p>
+		<p>
+			<input type="password" name="pw" />
+		</p>
+		<p>
+			<input type="submit" value="login_in" />
+		</p>
+	</form>
+	
+	<br/>
+	
+	<a href="/regist">Register here</a>
+
+</body>
+</html>

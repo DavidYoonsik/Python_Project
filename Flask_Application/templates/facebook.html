@@ -1,0 +1,14 @@
+<html>
+<body>
+	<table border="1">
+		{% for f in content %}
+
+		<tr>
+			<td>{{ f['created_time'] }}</td>
+			<td>{{ f['message'] }}</td>
+		</tr>
+		{% endfor %}
+	</table>
+</body>
+</html>
+

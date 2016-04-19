@@ -1,0 +1,36 @@
+<html>
+<body>
+
+	<form action="/uploader" method="POST" enctype="multipart/form-data">
+		<input type="file" name="file" value="Choose File" /> <input
+			type="submit" />
+	</form>
+
+	{% if fn %}
+	<p>
+		<strong>Picture is stored as naming with:</strong> {{ fn }}
+	</p>
+	{% endif %}
+
+	<br />
+
+	<script type="text/javascript">
+		var x = '/static/uploads/' + String("{{fn}}");
+		console.log(x);
+	</script>
+
+	<table border="1">
+		{% for f in fileList %}
+		<tr>
+				<td><a href={{f[0]}}>{{f[1]}}</a></td>
+				<td>{{f[2]}}</a></td>
+		</tr>
+		{% endfor %}
+	</table>
+	
+	
+	<iframe src="http://localhost:5600/goto/feb6726b933bbf540b33e4225079a956" height="100%" width="100%"></iframe>
+	
+
+</body>
+</html>

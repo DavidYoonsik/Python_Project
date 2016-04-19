@@ -1,0 +1,30 @@
+<html>
+<head>
+<title>Python Regist Page</title>
+</head>
+<body>
+
+	{% if error %}
+		<p><strong>Error:</strong> {{ error }} </p>
+	{% endif %}
+
+	<form action="/regist" method="post">
+		<p>Enter name:</p>
+		<p>
+			<input type="text" name="name" required="required"/>
+		</p>
+		<p>Enter email:</p>
+		<p>
+			<input type="email" name="email" required="required"/>
+		</p>
+		<p>Enter Password:</p>
+		<p>
+			<input type="password" name="pw" required="required"/>
+		</p>
+		<p>
+			<input type="submit" value="Regist" />
+		</p>
+	</form>
+
+</body>
+</html>

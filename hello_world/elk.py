@@ -1,28 +1,25 @@
+# -*- coding: utf-8 -*-
+
 from datetime import datetime
 
 from elasticsearch import Elasticsearch
 
-es = Elasticsearch();
-
-doc = {
-    'author': 'kimchy',
-    'text': 'Elasticsearch: cool. bonsai cool.',
-    'timestamp': datetime.now()
+class connect_elk():
+    es = Elasticsearch();
     
-}
+    def get_data(self, ind, typ):
+        data = self.es.search(index=ind, doc_type=typ)
+        sizes = 10 #data['hits']['total']
+        data = self.es.search(index=ind, size=sizes)
+        
+        for hit in data['hits']['hits']:
+            print(hit["_source"])
+            
+    def create_index(self, ind, typ, doc):
+        result = self.es.index(index=ind, doc_type=typ, body=doc)
+        print(result['created'])
+        
+elk = connect_elk()
 
-#res = es.index(index="test-index", doc_type='tweet', id=1, body=doc)
+elk.get_data('facebook', 'fb')
 
-# create index, meaning make room for the data which will come to
-#print(res['created'])
-
-test = es.search(index=['movies'],doc_type=['movie'])
-sizes = test['hits']['total']
-
-res = es.search(index="movies", size=sizes) #body={"query": {"match_all": {}}}
-
-print("Got %d Hits:" % res['hits']['total'])
-for hit in res['hits']['hits']:
-    print(hit["_source"])
-    fo = open("log.txt", "wb")
-    fo.write(hit["_source"]);

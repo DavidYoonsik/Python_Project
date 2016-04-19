@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+<head>
+<!-- <meta http-equiv="refresh" content="0; url=http://192.168.0.147:5000/email" /> -->
+
+<!-- <script type="text/javascript">
+	function CallbackFunction(event) {
+
+		if (window.event) {
+
+			if (window.event.clientX < 40 && window.event.clientY < 0) {
+
+				history.go(-1)();
+
+			} else {
+
+				alert("refresh button is clicked");
+			}
+
+		} else {
+
+			// want some condition here so that I can differentiate between whether refresh button is clicked or back button is clicked.             
+		}
+	}
+</script> -->
+
+</head>
+<body> <!-- onbeforeunload="CallbackFunction();" -->
+
+	<h1>Email System</h1>
+
+	<h1>{{ content }}</h1>
+
+	<form action="/email" method=post>
+		<dl>
+			<dt>Email_Sender:</dt>
+
+			<dd>
+				<input type="text" name=email_sender value="" />
+			</dd>
+
+			<dt>Email_Receiver:</dt>
+
+			<dd>
+				<input type="text" name=email_receiver value="" />
+			</dd>
+
+			<dt>Content:</dt>
+			<dd>
+				<input type="text" name=email_content value="">
+			</dd>
+		</dl>
+		<p>
+			<input type=submit value=SEND>
+		</p>
+	</form>
+
+</body>
+</html>
+

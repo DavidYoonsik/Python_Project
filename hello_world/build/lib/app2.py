@@ -7,6 +7,9 @@ Created on 2016. 4. 11.
 from flask import Flask, render_template, request
 from flask_socketio import SocketIO, emit
 from flaskext.mysql import MySQL
+
+#for test
+from Person import Person
 import login_check
 
 #from werkzeug import generate_password_hash, check_password_hash
@@ -54,7 +57,7 @@ def showSignUp():
 #Got message from socket.io client emit
 @io.on('my event')
 def handle_my_custom_event(json):
-    print('received json: ' + str(json['data']))
+    print('received json: ' + str(json))
 
 @app.route('/signUp', methods=['POST'])
 def signUp():
@@ -65,6 +68,9 @@ def signUp():
     _password = request.form['inputPassword']
     
     print _name + ', ' + _email + ', ' + _password
+    
+    lc = login_check
+    lc.login.ch(_email, _password)
 
     result = login_checks(_email, _password)
     
@@ -86,6 +92,8 @@ def signUp():
     
     #emit('my_response', "Oh yes!", broadcast=True)
     #_hashed_password = generate_password_hash(_password)
+    
+    
 
 if __name__ == "__main__":    
     io.run(app)
