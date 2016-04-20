@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
 import os, datetime
-from flask import Flask, request, render_template, flash
+from flask import Flask, request, render_template, flash, jsonify
 from werkzeug import redirect, secure_filename
 from flask.helpers import url_for, make_response
 from flask_mail import Mail, Message
 from functools import wraps, update_wrapper
 from elasticsearch import Elasticsearch
+import MySQLdb as mysql
 
 
 # import flask module
@@ -24,6 +25,27 @@ app.config['MAIL_USE_SSL'] = True
 #app.config['']
 
 app.secret_key = 'secret'
+
+@app.route('/music', methods=['post', 'get'])
+def music_play():
+    
+    if request.method == 'POST':
+            conn = mysql.connect(host='localhost', user='root', passwd='admin', db='python', charset='utf8')
+            cursor = conn.cursor()
+             
+            query = "SELECT st, et, lyrics FROM lyrics " # WHERE user_email = %s AND user_pw = %s
+            #value = (email, pw)
+            #cursor.execute("set names utf8")
+            cursor.execute(query)
+            data = cursor.fetchall()
+
+            cursor.close()
+            conn.close()
+#             return list(data)
+            return jsonify(info = data)
+    
+    else:
+        return render_template('music.html')
 
 @app.route('/facebook', methods=['post', 'get'])    
 def facebook_data():
