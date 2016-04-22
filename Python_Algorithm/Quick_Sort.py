@@ -36,7 +36,7 @@ class quick_sort():
         return R
         
         
-list = [2, 1, 4, 3]
+list = [5, 8, 4, 1, 9, 5, 8, 4, 1, 5, 8, 4, 1]
 first = 0
 last = len(list) - 1
 

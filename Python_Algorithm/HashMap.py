@@ -10,7 +10,7 @@ Created on 2016. 4. 19.
 
 class HashMap():
     def __init__(self):
-        self.size = 15
+        self.size = 5
         self.map = [None] * self.size
         # 처음 map 의 사이즈를 정해준다. 보통은 15개 정도로...
         

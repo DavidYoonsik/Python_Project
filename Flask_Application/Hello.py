@@ -1,12 +1,14 @@
 # -*- coding: utf-8 -*-
 import os, datetime
-from flask import Flask, request, render_template, flash, jsonify
+from flask import Flask, render_template, flash, jsonify, request
 from werkzeug import redirect, secure_filename
 from flask.helpers import url_for, make_response
 from flask_mail import Mail, Message
 from functools import wraps, update_wrapper
 from elasticsearch import Elasticsearch
 import MySQLdb as mysql
+from matplotlib.pyplot import plot, title, legend, show
+from scipy import stats, polyval
 
 
 # import flask module
@@ -26,9 +28,31 @@ app.config['MAIL_USE_SSL'] = True
 
 app.secret_key = 'secret'
 
+@app.route('/machine', methods=['post', 'get'])
+def machine():
+    x = [3.52, 2.58, 3.31, 4.07, 4.62, 3.98, 4.29, 4.83, 3.71, 4.61, 3.90, 3.20]
+    y = [2.48, 2.27, 2.47, 2.77, 2.98, 3.05, 3.18, 3.46, 3.03, 3.25, 2.67, 2.53]
+    
+    slope, intercept, r_value, p_value, stderr = stats.linregress(x, y)
+    
+    ry = polyval([slope, intercept], x)
+    
+    print ry
+    
+    plot(x, y, 'k.')
+    
+    plot(x, ry, 'r.-')
+    
+    title('Regression result')
+    
+    legend(['original', 'regression'])
+    
+    show()
+    
+    return 'ok'
+
 @app.route('/music', methods=['post', 'get'])
 def music_play():
-    
     if request.method == 'POST':
             conn = mysql.connect(host='localhost', user='root', passwd='admin', db='python', charset='utf8')
             cursor = conn.cursor()
